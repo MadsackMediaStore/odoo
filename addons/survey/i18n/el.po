@@ -3,14 +3,15 @@
 # * survey
 # 
 # Translators:
-# Goutoudis Kostas <goutoudis@gmail.com>, 2015
+# Kostas Goutoudis <goutoudis@gmail.com>, 2015-2016
+# Kostas Goutoudis <goutoudis@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-21 14:07+0000\n"
-"PO-Revision-Date: 2015-12-05 23:25+0000\n"
-"Last-Translator: Goutoudis Kostas <goutoudis@gmail.com>\n"
+"PO-Revision-Date: 2016-11-12 13:40+0000\n"
+"Last-Translator: Kostas Goutoudis <goutoudis@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/odoo/odoo-8/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -238,19 +239,19 @@ msgstr "Συνημμένα"
 #. module: survey
 #: field:survey.mail.compose.message,author_id:0
 msgid "Author"
-msgstr "Δημιουργός"
+msgstr "Συντάκτης"
 
 #. module: survey
 #: help:survey.mail.compose.message,author_id:0
 msgid ""
 "Author of the message. If not set, email_from may hold an email address that"
 " did not match any partner."
-msgstr "Συγγραφέας του μυνήματος. Εάν δεν ρυθμιστεί, email από αυτές τις email διευθύνσεις που δεν ταιριάζουν σε κανένα συνεργάτη."
+msgstr "Συντάκτης του μηνύματος. Εάν δεν ρυθμιστεί, email από αυτές τις email διευθύνσεις που δεν ταιριάζουν σε κανένα συνεργάτη."
 
 #. module: survey
 #: field:survey.mail.compose.message,author_avatar:0
 msgid "Author's Avatar"
-msgstr "Άβαταρ Συγγραφέα"
+msgstr "Άβαταρ Συντάκτη"
 
 #. module: survey
 #: help:survey.mail.compose.message,body:0
@@ -526,7 +527,7 @@ msgstr ""
 #. module: survey
 #: model:survey.stage,name:survey.stage_draft
 msgid "Draft"
-msgstr "Προσχέδιο"
+msgstr "Πρόχειρο"
 
 #. module: survey
 #: field:survey.user_input,email:0
@@ -959,7 +960,7 @@ msgstr ""
 #. module: survey
 #: field:survey.mail.compose.message,record_name:0
 msgid "Message Record Name"
-msgstr "Περιγραφή εγγραφής Μυνήματος"
+msgstr "Περιγραφή εγγραφής Μηνύματος"
 
 #. module: survey
 #: help:survey.mail.compose.message,type:0
@@ -971,7 +972,7 @@ msgstr "Τύπος Μηνύματος: email για email μηνύματα, ει
 #. module: survey
 #: help:survey.mail.compose.message,message_id:0
 msgid "Message unique identifier"
-msgstr "Μοναδικός ταυτοποιητής μυνήματος"
+msgstr "Μοναδικός ταυτοποιητής μηνύματος"
 
 #. module: survey
 #: field:survey.mail.compose.message,message_id:0
@@ -1207,7 +1208,7 @@ msgstr ""
 #: help:survey.mail.compose.message,notified_partner_ids:0
 msgid ""
 "Partners that have a notification pushing this message in their mailboxes"
-msgstr "Συνεργάτες που έχουν προώθηση ειδοποιήσεων αυτού του μυνήματος στα εισερχόμενα τους"
+msgstr "Συνεργάτες που έχουν προώθηση ειδοποιήσεων αυτού του μηνύματος στα εισερχόμενα τους"
 
 #. module: survey
 #: model:survey.stage,name:survey.stage_permanent
@@ -1540,7 +1541,7 @@ msgstr ""
 #. module: survey
 #: field:survey.user_input,state:0
 msgid "Status"
-msgstr "Καθεστώς"
+msgstr "Κατάσταση"
 
 #. module: survey
 #: field:survey.mail.compose.message,subject:0
@@ -1951,7 +1952,7 @@ msgstr ""
 #. module: survey
 #: field:survey.survey,message_unread:0
 msgid "Unread Messages"
-msgstr "Αδιάβαστα Μυνήματα"
+msgstr "Αδιάβαστα Μηνύματα"
 
 #. module: survey
 #: field:survey.mail.compose.message,use_active_domain:0

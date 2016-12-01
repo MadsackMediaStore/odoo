@@ -3,14 +3,14 @@
 # * membership
 # 
 # Translators:
-# Goutoudis Kostas <goutoudis@gmail.com>, 2015
+# Kostas Goutoudis <goutoudis@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-21 14:08+0000\n"
-"PO-Revision-Date: 2015-12-05 23:20+0000\n"
-"Last-Translator: Goutoudis Kostas <goutoudis@gmail.com>\n"
+"PO-Revision-Date: 2016-10-29 11:24+0000\n"
+"Last-Translator: Kostas Goutoudis <goutoudis@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/odoo/odoo-8/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr "# Τιμολογημένων"
 #. module: membership
 #: field:report.membership,num_paid:0
 msgid "# Paid"
-msgstr "# Πληρωμένο"
+msgstr "# Εξοφλημένο"
 
 #. module: membership
 #: field:report.membership,num_waiting:0
@@ -43,12 +43,12 @@ msgstr ""
 #. module: membership
 #: field:membership.membership_line,account_invoice_line:0
 msgid "Account Invoice line"
-msgstr ""
+msgstr "Λογαριασμός Γραμμής Τιμολογίου"
 
 #. module: membership
 #: view:product.template:membership.membership_products_form
 msgid "Add a description..."
-msgstr ""
+msgstr "Προσθέστε μια περιγραφή..."
 
 #. module: membership
 #: view:res.partner:membership.view_res_partner_member_filter
@@ -314,7 +314,7 @@ msgstr ""
 #. module: membership
 #: view:res.partner:membership.view_res_partner_member_filter
 msgid "Invoiced/Paid/Free"
-msgstr "Τιμολογημένα/Πληρωμένα/Δερεάν"
+msgstr "Τιμολογημένα/Πληρωμένα/Δωρεάν"
 
 #. module: membership
 #: help:res.partner,membership_state:0
