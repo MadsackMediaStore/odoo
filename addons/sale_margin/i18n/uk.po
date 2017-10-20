@@ -3,14 +3,15 @@
 # * sale_margin
 # 
 # Translators:
+# Bohdan Lisnenko <lem8r.ka11a@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo 9.0\n"
+"Project-Id-Version: Odoo Server 10.saas~18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-07 14:41+0000\n"
-"PO-Revision-Date: 2015-11-15 20:45+0000\n"
-"Last-Translator: Bogdan\n"
-"Language-Team: Ukrainian (http://www.transifex.com/odoo/odoo-9/language/uk/)\n"
+"POT-Creation-Date: 2017-10-02 11:26+0000\n"
+"PO-Revision-Date: 2017-10-02 11:26+0000\n"
+"Last-Translator: Bohdan Lisnenko <lem8r.ka11a@gmail.com>, 2017\n"
+"Language-Team: Ukrainian (https://www.transifex.com/odoo/teams/41243/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -34,19 +35,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:sale_margin.field_sale_order_margin
 #: model:ir.model.fields,field_description:sale_margin.field_sale_report_margin
 msgid "Margin"
-msgstr "Поле"
+msgstr "Маржа"
 
 #. module: sale_margin
 #: model:ir.model,name:sale_margin.model_sale_order
-msgid "Sales Order"
-msgstr "Sales Order"
+msgid "Quotation"
+msgstr "Пропозиція"
 
 #. module: sale_margin
 #: model:ir.model,name:sale_margin.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Рядок замовлення"
 
 #. module: sale_margin
 #: model:ir.model,name:sale_margin.model_sale_report
 msgid "Sales Orders Statistics"
-msgstr ""
+msgstr "Статистика замовлень на продаж"

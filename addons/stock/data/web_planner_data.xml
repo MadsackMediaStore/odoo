@@ -20,10 +20,6 @@
                     <p>
                         In short, you will get a more efficient warehouse management that leads
                         to inventory reduction and better efficiencies in your daily operations.
-                    </p><p>
-                        If you need help, do not hesitate to contact our experts
-                        using the <span class="fa fa-question-circle"/> button on
-                        the top bar.
                     </p>
                     <div class="mt32">
                         <img class="signature mb8" src="/web_planner/static/src/img/fabien_signature.png"/>
@@ -290,9 +286,9 @@
                                 <div class="panel-body">
                                     <div><span class="label label-default text-center odoo_purple"><a t-att-href="prepare_backend_url('sale.action_quotations')"> Create a Quotation</a></span><div> for a customer and add products</div></div>
                                     <span class="fa fa-angle-down fa-2x"></span>
-                                    <div><span class="label label-default text-center odoo_purple">Confirm Sale</span><div>The quotation becomes a Sale Order and a Transfer Order is created</div></div>
+                                    <div><span class="label label-default text-center odoo_purple">Confirm Sale</span><div>The quotation becomes a Sales Order and a Transfer Order is created</div></div>
                                     <span class="fa fa-angle-down fa-2x"></span>
-                                    <div><span class="label label-default text-center odoo_purple">Click on <span class="fa fa-truck"/> Delivery</span><div> on the sale order form to see Transfer Order</div></div>
+                                    <div><span class="label label-default text-center odoo_purple">Click on <span class="fa fa-truck"/> Delivery</span><div> on the sales order form to see Transfer Order</div></div>
                                 </div>
                             </div>
                         </div>
@@ -371,7 +367,7 @@
                     <p class="text-muted">
                         A good inventory management aims to optimize stock levels: not too low (or
                         you may find yourself out of stock) and not too high (your products occupy
-                        space and may loose value).
+                        space and may lose value).
                     </p>
                     <p>
                         In Odoo, <strong>Reordering Rules</strong> are used to replenish your products.
@@ -418,7 +414,7 @@
                     </p>
                     <p>
                         Lots can be encoded on incoming shipments, internal transfers and
-                        outgoing deliveries according to the settings in the picking type.
+                        outgoing deliveries according to the settings in the operation type.
                         The tracking can be configured on every product: not any tracing at
                         all, tracking by lot, or tracking by unique serial number.
                     </p>
