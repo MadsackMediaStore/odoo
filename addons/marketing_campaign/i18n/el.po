@@ -3,20 +3,48 @@
 # * marketing_campaign
 # 
 # Translators:
-# Goutoudis Kostas <goutoudis@gmail.com>, 2015
+# Kostas Goutoudis <goutoudis@gmail.com>, 2016
+# Martin Trigaux <mat@odoo.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo 9.0\n"
+"Project-Id-Version: Odoo Server 10.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-07 14:40+0000\n"
-"PO-Revision-Date: 2015-11-21 23:53+0000\n"
-"Last-Translator: Goutoudis Kostas <goutoudis@gmail.com>\n"
-"Language-Team: Greek (http://www.transifex.com/odoo/odoo-9/language/el/)\n"
+"POT-Creation-Date: 2016-09-07 08:57+0000\n"
+"PO-Revision-Date: 2016-09-07 08:57+0000\n"
+"Last-Translator: Martin Trigaux <mat@odoo.com>, 2016\n"
+"Language-Team: Greek (https://www.transifex.com/odoo/teams/41243/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: marketing_campaign
+#: model:mail.template,body_html:marketing_campaign.email_template_3
+msgid ""
+"\n"
+"<p>Hello,</p>\n"
+"<p>We are delighted to let you know that you have entered the select circle of our Gold Partners!</p>\n"
+"<p>Thank you,</p>\n"
+msgstr ""
+
+#. module: marketing_campaign
+#: model:mail.template,body_html:marketing_campaign.email_template_2
+msgid ""
+"\n"
+"<p>Hello,</p>\n"
+"<p>We are delighted to welcome you among our Silver Partners as of today!</p>\n"
+"<p>Thank you,</p>\n"
+msgstr ""
+
+#. module: marketing_campaign
+#: model:mail.template,body_html:marketing_campaign.email_template_1
+msgid ""
+"\n"
+"<p>Hello,</p>\n"
+"<p>You will receive your welcome pack via email shortly.</p>\n"
+"<p>Thank you,</p>\n"
+msgstr ""
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_campaign_analysis_count
@@ -61,10 +89,10 @@ msgid "Activity"
 msgstr "Δραστηριότητα"
 
 #. module: marketing_campaign
-#: code:addons/marketing_campaign/marketing_campaign.py:479
+#: code:addons/marketing_campaign/models/marketing_campaign.py:384
 #, python-format
 msgid "After %(interval_nbr)d %(interval_type)s"
-msgstr ""
+msgstr "Μετά %(interval_nbr)d %(interval_type)s"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_segment_search
@@ -74,7 +102,7 @@ msgstr "Όλα"
 #. module: marketing_campaign
 #: selection:marketing.campaign.segment,sync_mode:0
 msgid "All records (no duplicates)"
-msgstr ""
+msgstr "Όλα τα αρχεία (όχι διπλότυπα)"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_activity_signal
@@ -82,6 +110,9 @@ msgid ""
 "An activity with a signal can be called programmatically. Be careful, the "
 "workitem is always created when a signal is sent"
 msgstr ""
+"Μια δραστηριότητα με ένα σήμα μπορεί να κληθεί προγραμματιστικά. Να είστε "
+"προσεκτικοί, ένα στοιχείο εργασίας δημιουργείται πάντα όταν ένα μήνυμα έχει "
+"σταλεί"
 
 #. module: marketing_campaign
 #: selection:campaign.analysis,month:0
@@ -99,7 +130,7 @@ msgid "Automatic"
 msgstr "Αυτόματα"
 
 #. module: marketing_campaign
-#: code:addons/marketing_campaign/marketing_campaign.py:478
+#: code:addons/marketing_campaign/models/marketing_campaign.py:383
 #, python-format
 msgid "Automatic transition"
 msgstr "Αυτόματη μετάβαση"
@@ -110,6 +141,9 @@ msgid ""
 "By activating this option, workitems that aren't executed because the "
 "condition is not met are marked as cancelled instead of being deleted."
 msgstr ""
+"Με την ενεργοποίηση αυτής της επιλογής, τα στοιχεία εργασίας που δεν "
+"εκτελούνται διότι η προϋπόθεση αυτή δεν πληρείται επισημένονται ως ακυρωμένα"
+" αντί για να διαγραφούν."
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_campaign_analysis_campaign_id
@@ -135,7 +169,7 @@ msgstr "Δραστηριότητα Εκστρατείας"
 #: model:ir.model,name:marketing_campaign.model_campaign_analysis
 #: model:ir.ui.view,arch_db:marketing_campaign.view_campaign_analysis_search
 msgid "Campaign Analysis"
-msgstr ""
+msgstr "Ανάλυση Εκστρατείας"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_diagram
@@ -145,22 +179,22 @@ msgstr "Επεξεργαστής Εκστρατειών"
 #. module: marketing_campaign
 #: model:ir.actions.act_window,name:marketing_campaign.act_marketing_campaing_stat
 msgid "Campaign Follow-up"
-msgstr ""
+msgstr "Παρακολούθηση Εκστρατείας"
 
 #. module: marketing_campaign
 #: model:ir.model,name:marketing_campaign.model_marketing_campaign_segment
 msgid "Campaign Segment"
-msgstr ""
+msgstr "Τμήμα Εκστρατείας"
 
 #. module: marketing_campaign
 #: model:ir.model,name:marketing_campaign.model_marketing_campaign_transition
 msgid "Campaign Transition"
-msgstr ""
+msgstr "Μετάβαση Εκστρατείας"
 
 #. module: marketing_campaign
 #: model:ir.model,name:marketing_campaign.model_marketing_campaign_workitem
 msgid "Campaign Workitem"
-msgstr ""
+msgstr "Στοιχείο Εργασίας Εκστρατείας"
 
 #. module: marketing_campaign
 #: model:ir.actions.act_window,name:marketing_campaign.action_marketing_campaign_form
@@ -174,34 +208,37 @@ msgstr "Εκστρατείες"
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_workitem_tree
 msgid "Cancel"
-msgstr "Ακύρωση"
+msgstr "Άκυρο"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_form
 msgid "Cancel Campaign"
-msgstr ""
+msgstr "Ακύρωση Εκστρατείας"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_segment_form
 msgid "Cancel Segment"
-msgstr ""
+msgstr "Ακύρωση Τμήματος"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_workitem_form
 msgid "Cancel Workitem"
-msgstr ""
+msgstr "Ακύρωση Στοιχείου Εργασίας"
 
 #. module: marketing_campaign
 #: selection:campaign.analysis,state:0 selection:marketing.campaign,state:0
 #: selection:marketing.campaign.segment,state:0
 #: selection:marketing.campaign.workitem,state:0
 msgid "Cancelled"
-msgstr "Ακυρωμένο"
+msgstr "Ακυρώθηκε"
 
 #. module: marketing_campaign
+#: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_activity_object_id
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_object_id
+#: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_segment_object_id
+#: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_workitem_object_id
 msgid "Choose the resource on which you want this campaign to be run"
-msgstr ""
+msgstr "Επιλέξτε την πηγή στην οποία θέλετε αυτή η εκστρατεία να εκτελεστεί"
 
 #. module: marketing_campaign
 #: model:ir.actions.act_window,help:marketing_campaign.action_marketing_campaign_form
@@ -216,24 +253,24 @@ msgstr "Κλείσιμο"
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_activity_condition
 msgid "Condition"
-msgstr "Συνθήκη"
+msgstr "Κατάσταση"
 
 #. module: marketing_campaign
 #: model:mail.template,subject:marketing_campaign.email_template_2
 msgid "Congratulations! You are now a Silver Partner!"
-msgstr ""
+msgstr "Συγχαρητήρια! Είστε τώρα ένας Αργυρός Συνεργάτης! "
 
 #. module: marketing_campaign
 #: model:mail.template,subject:marketing_campaign.email_template_3
 msgid "Congratulations! You are now one of our Gold Partners!"
-msgstr ""
+msgstr "Συγχαρητήρια! Είστε τώρα ένας Χρυσός Συνεργάτης! "
 
 #. module: marketing_campaign
-#: code:addons/marketing_campaign/marketing_campaign.py:480
+#: code:addons/marketing_campaign/models/marketing_campaign.py:385
 #: selection:marketing.campaign.transition,trigger:0
 #, python-format
 msgid "Cosmetic"
-msgstr ""
+msgstr "καλλυντικό"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_campaign_analysis_total_cost
@@ -265,9 +302,9 @@ msgid "Created on"
 msgstr "Δημιουργήθηκε στις"
 
 #. module: marketing_campaign
-#: selection:marketing.campaign.activity,type:0
+#: selection:marketing.campaign.activity,action_type:0
 msgid "Custom Action"
-msgstr ""
+msgstr "Προσαρμοσμένη Δράση"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_segment_sync_last_date
@@ -275,16 +312,18 @@ msgid ""
 "Date on which this segment was synchronized last time (automatically or "
 "manually)"
 msgstr ""
+"Ημερομηνία κατά την οποία το τμήμα αυτό είχε συγχρονιστεί την τελευταία φορά"
+" (αυτόματα ή χειροκίνητα)"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_segment_date_done
 msgid "Date this segment was last closed or cancelled."
-msgstr ""
+msgstr "Ημερομηνία αυτό το τμήμα ήταν τελευταία κλειστό ή ακυρώθηκε."
 
 #. module: marketing_campaign
 #: selection:marketing.campaign.transition,interval_type:0
 msgid "Day(s)"
-msgstr "Ημέρες"
+msgstr "Ημέρα(ες)"
 
 #. module: marketing_campaign
 #: selection:campaign.analysis,month:0
@@ -301,6 +340,13 @@ msgid ""
 "records which have the same value for the unique field as other records that"
 " already entered the campaign."
 msgstr ""
+"Καθορίζει ένα πρόσθετο κριτήριο για να προσθέσετε στο φίλτρο κατά την "
+"επιλογή των νέων εγγραφών για να εισφέρει στην εκστρατεία. \"Δεν υπάρχουν "
+"διπλότυπα\" αποτρέπει την επιλογή των αρχείων που έχουν ήδη εισέλθει στην "
+"εκστρατεία προηγουμένως.Αν η εκστρατεία έχει ορίσει ένα «μοναδικό πεδίο\", "
+"\"δεν υπάρχουν διπλότυπα\" θα αποτρέψει επίσης την επιλογή αρχείων τα οποία "
+"έχουν την ίδια αξία για το μοναδικό πεδίο καθώς και άλλα αρχεία έχουν ήδη "
+"εισαχθεί στην εκστρατεία."
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_campaign_analysis_display_name
@@ -315,7 +361,7 @@ msgstr "Εμφάνιση Ονόματος"
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_activity_keep_if_condition_not_met
 msgid "Don't Delete Workitems"
-msgstr ""
+msgstr "Μην διαγράφετε Στοιχεία Εργασίας"
 
 #. module: marketing_campaign
 #: selection:campaign.analysis,state:0
@@ -325,27 +371,27 @@ msgstr ""
 #: selection:marketing.campaign.segment,state:0
 #: selection:marketing.campaign.workitem,state:0
 msgid "Done"
-msgstr "Ολοκληρωμένο"
+msgstr "Εκπληρωμένη"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_search
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_segment_search
 msgid "Draft"
-msgstr "Προσωρινό"
+msgstr "Πρόχειρο"
 
 #. module: marketing_campaign
-#: code:addons/marketing_campaign/marketing_campaign.py:170
+#: code:addons/marketing_campaign/models/marketing_campaign.py:127
 #, python-format
 msgid "Duplicating campaigns is not supported."
 msgstr ""
 
 #. module: marketing_campaign
-#: selection:marketing.campaign.activity,type:0
+#: selection:marketing.campaign.activity,action_type:0
 msgid "Email"
 msgstr "Email"
 
 #. module: marketing_campaign
-#: code:addons/marketing_campaign/marketing_campaign.py:752
+#: code:addons/marketing_campaign/models/marketing_campaign.py:586
 #, python-format
 msgid "Email Preview"
 msgstr "Προεπισκόπηση email"
@@ -354,6 +400,11 @@ msgstr "Προεπισκόπηση email"
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_activity_email_template_id
 msgid "Email Template"
 msgstr "Πρότυπο email"
+
+#. module: marketing_campaign
+#: model:ir.model,name:marketing_campaign.model_email_template_preview
+msgid "Email Template Preview"
+msgstr "Προεπισκόπηση πρότυπου email"
 
 #. module: marketing_campaign
 #: model:ir.model,name:marketing_campaign.model_mail_template
@@ -424,6 +475,12 @@ msgid ""
 "view of the Resource. If no filter is set, all records are selected without "
 "filtering. The synchronization mode may also add a criterion to the filter."
 msgstr ""
+"Φίλτρο για να επιλέξετε τα αντίστοιχα αρχεία πόρων  που ανήκουν σε αυτό το "
+"τμήμα. Νέα φίλτρα μπορούν να δημιουργηθούν και να αποθηκευτούν "
+"χρησιμοποιώντας την προηγμένη αναζήτηση στην προβολή λίστας του Πόρου. Εάν "
+"δεν έχει οριστεί κανένα φίλτρο, όλα τα αρχεία  επιλέγονται χωρίς "
+"φιλτράρισμα. Η λειτουργία συγχρονισμού μπορεί επίσης να προσθέσει ένα "
+"κριτήριο στο φίλτρο."
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_fixed_cost
@@ -437,6 +494,10 @@ msgid ""
 " revenue on each campaign activity. Cost and Revenue statistics are included"
 " in Campaign Reporting."
 msgstr ""
+"Σταθερό κόστος για την εκτέλεση αυτής της εκστρατείας. Μπορείτε επίσης να "
+"ορίσετε μεταβλητό κόστος και έσοδα για κάθε δραστηριότητα της εκστρατείας. "
+"Στατιστικά στοιχεία για τα κόστη και τα έσοδα περιλαμβάνονται στις Αναφορές "
+"της Εκστρατείας."
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_form
@@ -455,25 +516,7 @@ msgstr "Follow-up"
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_segment_search
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_workitem_search
 msgid "Group By"
-msgstr "Ομαδοποίηση Ανά"
-
-#. module: marketing_campaign
-#: model:mail.template,body_html:marketing_campaign.email_template_1
-msgid "Hello, you will receive your welcome pack via email shortly."
-msgstr "Γεια σας, θα λάβετε σύντομα μέσω email το πακέτο καλωσορίσματος."
-
-#. module: marketing_campaign
-#: model:mail.template,body_html:marketing_campaign.email_template_3
-msgid ""
-"Hi, we are delighted to let you know that you have entered the select circle"
-" of our Gold Partners"
-msgstr ""
-
-#. module: marketing_campaign
-#: model:mail.template,body_html:marketing_campaign.email_template_2
-msgid ""
-"Hi, we are delighted to welcome you among our Silver Partners as of today!"
-msgstr ""
+msgstr "Ομαδοποίηση Κατά"
 
 #. module: marketing_campaign
 #: selection:marketing.campaign.transition,interval_type:0
@@ -483,7 +526,7 @@ msgstr "Ώρα"
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_transition_trigger
 msgid "How is the destination workitem triggered"
-msgstr ""
+msgstr "Πως ο προορισμός του στοιχείου εργασίας ενεργοποιείται"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_campaign_analysis_id
@@ -493,12 +536,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_transition_id
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_workitem_id
 msgid "ID"
-msgstr "ID"
+msgstr "Κωδικός"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_workitem_date
 msgid "If date is not set, this workitem has to be run manually"
 msgstr ""
+"Αν η ημερομηνία δεν οριστεί, το στοιχείο εργασίας θα πρέπει να εκτελεστεί "
+"χειροκίνητα"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_unique_field_id
@@ -512,6 +557,8 @@ msgid ""
 "campaign previously. Only easily comparable fields like textfields, "
 "integers, selections or single relationships may be used."
 msgstr ""
+"Εάν οριστεί, αυτό το πεδίο θα βοηθήσει τα τμήματα που λειτουργούν σε κατάσταση \"δεν υπάρχουν διπλότυπα\" να αποφύγουν την επιλογή παρόμοιων εγγραφών δύο φορές. Παρόμοιες εγγραφές είναι τα αρχεία που έχουν την ίδια τιμή για αυτό το μοναδικό πεδίο. Για παράδειγμα, με την επιλογή του πεδίου \"email_from\" για τις  Συστάσεις CRM θα εμποδίσετε την αποστολή της ίδιας εκστρατείας στην ίδια διεύθυνση ηλεκτρονικού ταχυδρομείου και πάλι. Αν δεν έχει οριστεί, το «όχι διπλότυπα\" τμήματα θα αποφεχθεί μόνο η επιλογή του ίδιου αρχείου ξανά αν έχει εισαγάγει την εκστρατεία προηγουμένως.\n"
+"Μπορούν να χρησιμοποιηθούν μόνο εύκολα συγκρινόμενα πεδία όπως πεδία κειμένου, ακέραιοι, επιλογές ή  μεμονωμένες σχέσεις."
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_activity_form
@@ -521,7 +568,7 @@ msgstr "Εισροές"
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_segment_date_run
 msgid "Initial start date of this segment."
-msgstr ""
+msgstr "Αρχική ημερομηνία έναρξης αυτού του τμήματος. "
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_transition_interval_type
@@ -531,7 +578,7 @@ msgstr "Μονάδα Διαστήματος"
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_transition_interval_nbr
 msgid "Interval Value"
-msgstr ""
+msgstr "Αξία μεσοδιαστήματος"
 
 #. module: marketing_campaign
 #: selection:campaign.analysis,month:0
@@ -556,7 +603,7 @@ msgstr "Ιούνιος"
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_transition___last_update
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_workitem___last_update
 msgid "Last Modified on"
-msgstr "Τελευταία αλλαγή στις"
+msgstr "Τελευταία τροποποίηση στις"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_segment_sync_last_date
@@ -570,7 +617,7 @@ msgstr "Τελευταίος Συγχρονισμός"
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_workitem_write_uid
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_write_uid
 msgid "Last Updated by"
-msgstr "Τελευταία ενημέρωση από"
+msgstr "Τελευταία Ενημέρωση από"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_activity_write_date
@@ -579,22 +626,27 @@ msgstr "Τελευταία ενημέρωση από"
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_workitem_write_date
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_write_date
 msgid "Last Updated on"
-msgstr "Τελευταία ενημέρωση στις"
+msgstr "Τελευταία Ενημέρωση στις"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_segment_date_run
 msgid "Launch Date"
-msgstr ""
+msgstr "Ημερομηνία έναρξης"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_segment_search
 msgid "Launch Month"
-msgstr ""
+msgstr "Μήνας Έναρξης"
 
 #. module: marketing_campaign
 #: model:ir.ui.menu,name:marketing_campaign.menu_marketing_campaign_root
 msgid "Lead Automation"
 msgstr ""
+
+#. module: marketing_campaign
+#: model:res.groups,name:marketing_campaign.group_lead_automation_manager
+msgid "Manager"
+msgstr "Διευθυντής"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_search
@@ -610,36 +662,36 @@ msgstr "Μάρτιος"
 #: model:ir.model,name:marketing_campaign.model_marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_form
 msgid "Marketing Campaign"
-msgstr "Εκστρατεία Μάρκετινγκ"
+msgstr "Εκστρατεία Marketing"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_workitem_form
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_workitem_search
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_workitem_tree
 msgid "Marketing Campaign Activities"
-msgstr "Δραστηριότητες Εκστρατείας Μάρκετινγκ"
+msgstr "Δραστηριότητες Εκστρατείας Marketing"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_workitem_search
 msgid "Marketing Campaign Activity"
-msgstr ""
+msgstr "Δραστηριότητα Εκστρατείας Marketing"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_segment_form
 msgid "Marketing Campaign Segment"
-msgstr ""
+msgstr "Τμήμα Εκστρατείας Marketing"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_form
 msgid "Marketing Campaign Statistics"
-msgstr ""
+msgstr "Στατιστικά Στοιχεία Εκστρατείας Marketing"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_campaign_analysis_tree
 #: model:ir.ui.view,arch_db:marketing_campaign.view_report_campaign_analysis_graph
 #: model:ir.ui.view,arch_db:marketing_campaign.view_report_campaign_analysis_pivot
 msgid "Marketing Reports"
-msgstr "Αναφορές Μάρκετινγκ"
+msgstr "Αναφορές Marketing"
 
 #. module: marketing_campaign
 #: selection:campaign.analysis,month:0
@@ -650,11 +702,12 @@ msgstr "Μάιος"
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_mode
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_search
 msgid "Mode"
-msgstr "Μοντέλο"
+msgstr "Είδος"
 
 #. module: marketing_campaign
-#: constraint:marketing.campaign.segment:0
-msgid "Model of filter must be same as resource model of Campaign "
+#: code:addons/marketing_campaign/models/marketing_campaign.py:198
+#, python-format
+msgid "Model of filter must be same as resource model of Campaign"
 msgstr ""
 
 #. module: marketing_campaign
@@ -668,13 +721,13 @@ msgstr "Μήνας(ες)"
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_segment_name
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_transition_name
 msgid "Name"
-msgstr "Όνομα"
+msgstr "Περιγραφή"
 
 #. module: marketing_campaign
 #: selection:marketing.campaign,state:0
 #: selection:marketing.campaign.segment,state:0
 msgid "New"
-msgstr "Νέο"
+msgstr "Νέα"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_segment_search
@@ -690,7 +743,7 @@ msgstr "Τροποποιήθηκε Πρόσφατα"
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_activity_to_ids
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_activity_form
 msgid "Next Activities"
-msgstr "Επόμενες Δραστηριότητες"
+msgstr "Επόμενες Δράσεις"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_transition_activity_to_id
@@ -706,11 +759,13 @@ msgstr "Επόμενος Συγχρονισμός"
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_segment_date_next_sync
 msgid "Next time the synchronization job is scheduled to run automatically"
 msgstr ""
+"Την επόμενη φορά η εργασία συγχρονισμού θα προγραμματιστεί να εκτελεστεί "
+"αυτόματα"
 
 #. module: marketing_campaign
 #: selection:marketing.campaign,mode:0
 msgid "Normal"
-msgstr "Κανονικό"
+msgstr "Κανονική"
 
 #. module: marketing_campaign
 #: selection:campaign.analysis,month:0
@@ -732,23 +787,20 @@ msgstr "Οκτώβριος"
 msgid ""
 "Odoo's marketing campaign allows you to automate communication\n"
 "            to your prospects. You can define a segment (set of conditions) on\n"
-"            your leads and partners to fullfil the campaign."
+"            your leads and partners to fulfill the campaign."
 msgstr ""
 
 #. module: marketing_campaign
 #: selection:marketing.campaign.segment,sync_mode:0
 msgid "Only records created after last sync"
-msgstr ""
+msgstr "Μόνο αρχεία που δημιουργήθηκαν μετά τον τελευταίο συγχρονισμό"
 
 #. module: marketing_campaign
 #: selection:marketing.campaign.segment,sync_mode:0
 msgid "Only records modified after last sync (no duplicates)"
 msgstr ""
-
-#. module: marketing_campaign
-#: model:ir.actions.client,name:marketing_campaign.action_client_marketing_menu
-msgid "Open Marketing Menu"
-msgstr "Άνοιγμα Μενού Μάρκετινγκ"
+"Μόνο αρχεία που τροποποιήθηκαν μετά τον τελευταίο συγχρονισμό (δεν υπάρχουν "
+"διπλότυπα)"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_activity_form
@@ -759,12 +811,12 @@ msgstr "Εκροές"
 #: model:ir.model.fields,field_description:marketing_campaign.field_campaign_analysis_partner_id
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_workitem_partner_id
 msgid "Partner"
-msgstr "Συνεργάτης"
+msgstr "Συναλλασόμενος"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_partner_field_id
 msgid "Partner Field"
-msgstr ""
+msgstr "Πεδίο Συνεργάτη"
 
 #. module: marketing_campaign
 #: model:ir.filters,name:marketing_campaign.filter0
@@ -781,7 +833,7 @@ msgstr "Προεπισκόπηση"
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_activity_from_ids
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_activity_form
 msgid "Previous Activities"
-msgstr "Προηγούμενες Δραστηριότητες"
+msgstr "Προηγούμενες Δράσεις"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_transition_activity_from_id
@@ -804,10 +856,16 @@ msgid ""
 "   - transitions: list of campaign transitions outgoing from this activity\n"
 "...- re: Python regular expression module"
 msgstr ""
+"Έκφραση Python για να αποφασιστεί αν μπορεί να εκτελεστεί η δραστηριότητα, διαφορετικά θα πρέπει να διαγραφεί ή να ακυρωθεί. Η έκφραση μπορεί να χρησιμοποιήσει τις ακόλουθες [browsable] μεταβλητές: \n"
+"- Δραστηριότητα: η δραστηριότητα εκστρατείας\n"
+"- Στοιχείο Εργασίας: Στοιχείο Εργασίας εκστρατείας \n"
+"- Πηγή: το αντικείμενο της πηγής αυτό το στοιχείο της εκστρατείας αντιπροσωπεύει\n"
+"- Μεταβάσεις: κατάλογος των μεταβάσεων της εκστρατείας που εξέρχονται απο αυτήν την δραστηριότητα\n"
+"...- Re: Python κανονικό άρθρωμα  έκφρασης"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_activity_report_id
-#: selection:marketing.campaign.activity,type:0
+#: selection:marketing.campaign.activity,action_type:0
 msgid "Report"
 msgstr "Αναφορά"
 
@@ -829,7 +887,7 @@ msgstr "Επαναφορά"
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_search
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_workitem_search
 msgid "Resource"
-msgstr "Πηγή"
+msgstr "Πόρος"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_workitem_res_id
@@ -840,7 +898,7 @@ msgstr "Αριθμός Πόρου"
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_workitem_res_name
 msgid "Resource Name"
-msgstr "Περιγραφή Πόρου"
+msgstr "Όνομα Πόρου"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_campaign_analysis_revenue
@@ -882,7 +940,7 @@ msgstr "Τμήμα"
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_segment_search
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_segment_tree
 msgid "Segments"
-msgstr "Τμήμα"
+msgstr "Τμήματα"
 
 #. module: marketing_campaign
 #: selection:campaign.analysis,month:0
@@ -896,6 +954,9 @@ msgid ""
 "reached this point has entailed a certain cost. You can get cost statistics "
 "in the Reporting section"
 msgstr ""
+"Ορίστε ένα μεταβλητό κόστος, αν σκεφτεί κανείς ότι κάθε στοιχείο της "
+"εκστρατείας που έχει φτάσει σε αυτό το σημείο συνεπάγεται κάποιο κόστος. "
+"Μπορείτε να δείτε τα στατιστικά  στοιχεία του κόστους στο τμήμα των Αναφορών"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_activity_revenue
@@ -904,17 +965,21 @@ msgid ""
 "reached this point has generated a certain revenue. You can get revenue "
 "statistics in the Reporting section"
 msgstr ""
+"Ορίστε τα αναμενόμενα έσοδα, αν σκεφτεί κανείς ότι κάθε στοιχείο της "
+"εκστρατείας που έχει φτάσει σε αυτό το σημείο έχει δημιουργήσει ορισμένα "
+"έσοδα. Μπορείτε να δείτε τα στατιστικά στοιχεία για τα  έσοδα  στο τμήμα των"
+" Αναφορών"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_form
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_segment_form
 msgid "Set to Draft"
-msgstr "Ορισμός σε Πρόχειρη"
+msgstr "Ορισμός σε Πρόχειρο"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_activity_signal
 msgid "Signal"
-msgstr ""
+msgstr "Σύνθημα"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_activity_start
@@ -936,17 +1001,21 @@ msgstr "Κατάσταση"
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_segment_search
 msgid "Sync mode: all records"
-msgstr ""
+msgstr "Λειτουργία Συγχρονισμού: όλα τα αρχεία"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_segment_search
 msgid "Sync mode: only records created after last sync"
 msgstr ""
+"Λειτουργία Συγχρονισμού: μόνο αρχεία που δημιουργήθηκαν μετά τον τελευταίο "
+"συγχρονισμό"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_segment_search
 msgid "Sync mode: only records updated after last sync"
 msgstr ""
+"Λειτουργία Συγχρονισμού: μόνο αρχεία που ενημερώθηκαν μετά τον τελευταίο "
+"συγχρονισμό"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_segment_sync_mode
@@ -961,67 +1030,78 @@ msgstr "Χειροκίνητος Συγχρονισμός"
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_mode
 msgid ""
-"Test - It creates and process all the activities directly (without waiting for the delay on transitions) but does not send emails or produce reports.\n"
+"Test - It creates and process all the activities directly (without waiting for the delay on transitions) but does not send emails or produce reports. \n"
 "Test in Realtime - It creates and processes all the activities directly but does not send emails or produce reports.\n"
-"With Manual Confirmation - the campaigns runs normally, but the user has to validate all workitem manually.\n"
+"With Manual Confirmation - the campaigns runs normally, but the user has to \n"
+" validate all workitem manually.\n"
 "Normal - the campaign runs normally and automatically sends all emails and reports (be very careful with this mode, you're live!)"
 msgstr ""
 
 #. module: marketing_campaign
 #: selection:marketing.campaign,mode:0
 msgid "Test Directly"
-msgstr ""
+msgstr "Δοκιμή Άμεσα"
 
 #. module: marketing_campaign
 #: model:ir.ui.view,arch_db:marketing_campaign.view_marketing_campaign_search
 msgid "Test Mode"
-msgstr ""
+msgstr "Λειτουργία Δοκιμής"
 
 #. module: marketing_campaign
 #: selection:marketing.campaign,mode:0
 msgid "Test in Realtime"
-msgstr ""
+msgstr "Δοκιμή σε Πραγματικό Χρόνο"
 
 #. module: marketing_campaign
-#: constraint:marketing.campaign.transition:0
-msgid "The To/From Activity of transition must be of the same Campaign "
+#: code:addons/marketing_campaign/models/marketing_campaign.py:401
+#, python-format
+msgid "The To/From Activity of transition must be of the same Campaign"
 msgstr ""
 
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_activity_server_action_id
 msgid "The action to perform when this activity is activated"
 msgstr ""
+"Η ενέργεια που θα πραγματοποιηθεί όταν  αυτή η δραστηριότητα είναι "
+"ενεργοποιημένη"
 
 #. module: marketing_campaign
-#: code:addons/marketing_campaign/marketing_campaign.py:114
+#: code:addons/marketing_campaign/models/marketing_campaign.py:107
 #, python-format
 msgid "The campaign cannot be marked as done before all segments are closed."
 msgstr ""
+"Η εκστρατεία δεν μπορεί να μαρκαριστεί ώς ολοκληρωμένη πριν όλα τα τμήματα "
+"κλείσουν"
 
 #. module: marketing_campaign
-#: code:addons/marketing_campaign/marketing_campaign.py:104
+#: code:addons/marketing_campaign/models/marketing_campaign.py:99
 #, python-format
 msgid ""
 "The campaign cannot be started. It does not have any starting activity. "
 "Modify campaign's activities to mark one as the starting point."
 msgstr ""
+"Η εκστρατεία δεν μπορεί να ξεκινήσει. Δεν έχει καμία δραστηριότητα έναρξης. "
+"Τροποποιήστε τις δραστηριότητες της εκστρατείας για να μαρκάρετε μια ως το "
+"σημείο έναρξης."
 
 #. module: marketing_campaign
-#: code:addons/marketing_campaign/marketing_campaign.py:92
+#: code:addons/marketing_campaign/models/marketing_campaign.py:87
 #, python-format
 msgid "The campaign cannot be started. There are no activities in it."
-msgstr ""
+msgstr "Η εκστρατεία δεν μπορεί να ξεκινήσει. Δεν υπάρχουν δράσεις σε αυτή."
 
 #. module: marketing_campaign
-#: code:addons/marketing_campaign/marketing_campaign.py:777
+#: code:addons/marketing_campaign/models/marketing_campaign.py:609
 #, python-format
 msgid "The current step for this item has no email or report to preview."
-msgstr "Το τρέχων βήμα για αυτό το αντικείμενο δεν έχει email ή αναφορά για επαλήθευση."
+msgstr ""
+"Το τρέχων βήμα για αυτό το αντικείμενο δεν έχει email ή αναφορά για "
+"επαλήθευση."
 
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_activity_email_template_id
 msgid "The email to send when this activity is activated"
-msgstr ""
+msgstr "Το email να σταλεί όταν η δραστηριότητα είναι ενεργοποιημένη"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_partner_field_id
@@ -1031,31 +1111,34 @@ msgid ""
 "for reporting purposes, via the Campaign Analysis or Campaign Follow-up "
 "views."
 msgstr ""
+"Τα στοιχεία εργασίας που δημιουργήθηκαν θα συνδεθούν με τον εταίρο που "
+"σχετίζεται με το αρχείο. Αν το αρχείο είναι ο ίδιος ο εταίρος αφήστε το "
+"πεδίο κενό. Αυτό είναι χρήσιμο για λόγους αναφοράς, μέσω των προβολών της "
+"Ανάλυσης Εκστρατείας ή της παρακολούθησης Εκστρατείας. "
 
 #. module: marketing_campaign
 #: sql_constraint:marketing.campaign.transition:0
 msgid "The interval must be positive or zero"
-msgstr ""
+msgstr "Το μεσοδιάστημα πρέπει να είναι θετικό ή μηδέν"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_activity_report_id
 msgid "The report to generate when this activity is activated"
-msgstr ""
+msgstr "Η αναφορά να δημιουργηθεί όταν η δραστηριότητα είναι ενεργοποιημένη"
 
 #. module: marketing_campaign
-#: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_activity_type
+#: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_activity_action_type
 msgid ""
 "The type of action to execute when an item enters this activity, such as:\n"
-"   - Email: send an email using a predefined email template\n"
-"   - Report: print an existing Report defined on the resource item and save it into a specific directory\n"
-"   - Custom Action: execute a predefined action, e.g. to modify the fields of the resource record\n"
-"  "
+"- Email: send an email using a predefined email template \n"
+"- Report: print an existing Report defined on the resource item and save it into a specific directory \n"
+"- Custom Action: execute a predefined action, e.g. to modify the fields of the resource record"
 msgstr ""
 
 #. module: marketing_campaign
 #: model:ir.model.fields,help:marketing_campaign.field_marketing_campaign_activity_start
 msgid "This activity is launched when the campaign starts."
-msgstr ""
+msgstr "Η δραστηριότητα θα ξεκινήσει όταν η εκστρατεία ξεκινάει."
 
 #. module: marketing_campaign
 #: selection:marketing.campaign.transition,trigger:0
@@ -1076,24 +1159,29 @@ msgid "Trigger"
 msgstr "Έναυσμα"
 
 #. module: marketing_campaign
-#: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_activity_type
+#: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_activity_action_type
 msgid "Type"
 msgstr "Τύπος"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_unique_field_id
 msgid "Unique Field"
-msgstr ""
+msgstr "Μοναδικό Πεδίο"
+
+#. module: marketing_campaign
+#: model:res.groups,name:marketing_campaign.group_lead_automation_user
+msgid "User"
+msgstr "Χρήστης"
 
 #. module: marketing_campaign
 #: model:ir.model.fields,field_description:marketing_campaign.field_marketing_campaign_activity_variable_cost
 msgid "Variable Cost"
-msgstr ""
+msgstr "Μεταβλητό Κόστος"
 
 #. module: marketing_campaign
 #: model:mail.template,subject:marketing_campaign.email_template_1
 msgid "Welcome to the Odoo Partner Channel!"
-msgstr ""
+msgstr "Καλώς ήρθατε στο Κανάλι Συνεργάτων του Odoo!"
 
 #. module: marketing_campaign
 #: selection:marketing.campaign,mode:0
@@ -1108,7 +1196,7 @@ msgstr "Workitems"
 #. module: marketing_campaign
 #: selection:marketing.campaign.transition,interval_type:0
 msgid "Year(s)"
-msgstr "Έτος(η)"
+msgstr "Ετος(η)"
 
 #. module: marketing_campaign
 #: model:ir.model,name:marketing_campaign.model_ir_actions_report_xml

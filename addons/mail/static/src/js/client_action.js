@@ -2,20 +2,21 @@ odoo.define('mail.chat_client_action', function (require) {
 "use strict";
 
 var chat_manager = require('mail.chat_manager');
-var ChatComposer = require('mail.ChatComposer');
+var composer = require('mail.composer');
 var ChatThread = require('mail.ChatThread');
+var utils = require('mail.utils');
 
 var config = require('web.config');
 var ControlPanelMixin = require('web.ControlPanelMixin');
 var core = require('web.core');
 var data = require('web.data');
+var data_manager = require('web.data_manager');
 var Dialog = require('web.Dialog');
 var framework = require('web.framework');
 var Model = require('web.Model');
 
 var pyeval = require('web.pyeval');
 var SearchView = require('web.SearchView');
-var session = require('web.session');
 var Widget = require('web.Widget');
 
 var QWeb = core.qweb;
@@ -43,27 +44,24 @@ var PartnerInviteDialog = Dialog.extend({
                 click: _.bind(this.on_click_add, this),
             }],
         });
-        this.PartnersModel = new Model('res.partner');
     },
     start: function(){
-        var self = this;
         this.$input = this.$('.o_mail_chat_partner_invite_input');
         this.$input.select2({
             width: '100%',
             allowClear: true,
             multiple: true,
             formatResult: function(item) {
-                var css_class = (item.im_status === 'away' ? "fa-clock-o" : "fa-circle" + (item.im_status === 'online' ? "" : "-o"));
-                return $('<span class="fa">').addClass(css_class).text(item.text);
+                var status = QWeb.render('mail.chat.UserStatus', {status: item.im_status});
+                return $('<span>').text(item.text).prepend(status);
             },
             query: function (query) {
-                self.PartnersModel.call('im_search', [query.term, 20]).then(function(result){
-                    var data = [];
-                    _.each(result, function(partner){
-                        partner.text = partner.name;
-                        data.push(partner);
+                chat_manager.search_partner(query.term, 20).then(function (partners) {
+                    query.callback({
+                        results: _.map(partners, function (partner) {
+                            return _.extend(partner, { text: partner.label });
+                        }),
                     });
-                    query.callback({results: data});
                 });
             }
         });
@@ -74,7 +72,7 @@ var PartnerInviteDialog = Dialog.extend({
         var data = this.$input.select2('data');
         if(data.length >= 1){
             var ChannelModel = new Model('mail.channel');
-            return ChannelModel.call('channel_invite', [], {ids : [this.channel_id], partner_ids: _.pluck(data, 'id')})
+            return ChannelModel.call('channel_invite', [this.channel_id], {partner_ids: _.pluck(data, 'id')})
                 .then(function(){
                     var names = _.escape(_.pluck(data, 'text').join(', '));
                     var notification = _.str.sprintf(_t('You added <b>%s</b> to the conversation.'), names);
@@ -107,7 +105,7 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
         "click .o_mail_partner_unpin": function (event) {
             event.stopPropagation();
             var channel_id = $(event.target).data("channel-id");
-            this.unsubscribe_from_channel(chat_manager.get_channel(channel_id));
+            chat_manager.unsubscribe(chat_manager.get_channel(channel_id));
         },
         "click .o_snackbar_undo": function (event) {
             event.preventDefault();
@@ -117,29 +115,74 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
                 chat_manager.undo_mark_as_read(msgs_ids, channel);
             });
         },
+        "click .o_mail_annoying_notification_bar .fa-close": function () {
+            this.$(".o_mail_annoying_notification_bar").slideUp();
+        },
+        "click .o_mail_request_permission": function (event) {
+            event.preventDefault();
+            this.$(".o_mail_annoying_notification_bar").slideUp();
+            var def = window.Notification && window.Notification.requestPermission();
+            if (def) {
+                def.then(function (value) {
+                    if (value === 'denied') {
+                        utils.send_notification(_t('Permission denied'), _t('Odoo will not have the permission to send native notifications on this device.'));
+                    } else {
+                        utils.send_notification(_t('Permission granted'), _t('Odoo has now the permission to send you native notifications on this device.'));
+                    }
+                });
+            }
+        },
+        "keydown": function (event) {
+            if (event.which === $.ui.keyCode.ESCAPE && this.selected_message) {
+                this.unselect_message();
+            }
+        },
+        "click .o_mail_open_channels": function () {
+            this.do_action({
+                name: _t('Public Channels'),
+                type: 'ir.actions.act_window',
+                res_model: "mail.channel",
+                views: [[false, 'kanban'], [false, 'form']],
+                domain: [['public', '!=', 'private']],
+            }, {
+                on_reverse_breadcrumb: this.on_reverse_breadcrumb,
+            });
+        },
     },
 
     on_attach_callback: function () {
+        chat_manager.bus.trigger('client_action_open', true);
         if (this.channel) {
             this.thread.scroll_to({offset: this.channels_scrolltop[this.channel.id]});
         }
     },
     on_detach_callback: function () {
+        chat_manager.bus.trigger('client_action_open', false);
         this.channels_scrolltop[this.channel.id] = this.thread.get_scrolltop();
     },
 
     init: function(parent, action, options) {
         this._super.apply(this, arguments);
         this.action_manager = parent;
+        this.dataset = new data.DataSetSearch(this, 'mail.message');
         this.domain = [];
         this.action = action;
         this.options = options || {};
         this.channels_scrolltop = {};
         this.throttled_render_sidebar = _.throttle(this.render_sidebar.bind(this), 100, { leading: false });
+        this.notification_bar = (window.Notification && window.Notification.permission === "default");
+        this.selected_message = null;
     },
 
     willStart: function () {
-        return chat_manager.is_ready;
+        var self = this;
+        var view_id = this.action && this.action.search_view_id && this.action.search_view_id[0];
+        var def = data_manager
+            .load_fields_view(this.dataset, view_id, 'search', false)
+            .then(function (fields_view) {
+                self.fields_view = fields_view;
+            });
+        return $.when(this._super(), chat_manager.is_ready, def);
     },
 
     start: function() {
@@ -151,8 +194,6 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
             action: this.action,
             disable_groupby: true,
         };
-        var dataset = new data.DataSetSearch(this, 'mail.message');
-        var view_id = (this.action && this.action.search_view_id && this.action.search_view_id[0]) || false;
         var default_channel_id = this.options.active_id ||
                                  this.action.context.active_id ||
                                  this.action.params.default_active_id ||
@@ -160,26 +201,25 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
         var default_channel = chat_manager.get_channel(default_channel_id) ||
                               chat_manager.get_channel('channel_inbox');
 
-        this.searchview = new SearchView(this, dataset, view_id, {}, options);
+        this.searchview = new SearchView(this, this.dataset, this.fields_view, options);
         this.searchview.on('search_data', this, this.on_search);
 
-        this.composer = new ChatComposer(this);
+        this.basic_composer = new composer.BasicComposer(this, {mention_partners_restricted: true});
+        this.extended_composer = new composer.ExtendedComposer(this, {mention_partners_restricted: true});
         this.thread = new ChatThread(this, {
             display_help: true,
-            shorten_messages: false,
         });
 
         this.$buttons = $(QWeb.render("mail.chat.ControlButtons", {}));
         this.$buttons.find('button').css({display:"inline-block"});
         this.$buttons.on('click', '.o_mail_chat_button_invite', this.on_click_button_invite);
-        this.$buttons.on('click', '.o_mail_chat_button_detach', this.on_click_button_detach);
         this.$buttons.on('click', '.o_mail_chat_button_unsubscribe', this.on_click_button_unsubscribe);
         this.$buttons.on('click', '.o_mail_chat_button_settings', this.on_click_button_settings);
         this.$buttons.on('click', '.o_mail_toggle_channels', function () {
             self.$('.o_mail_chat_sidebar').slideToggle(200);
         });
         this.$buttons.on('click', '.o_mail_chat_button_mark_read', function () {
-            chat_manager.mark_all_as_read();
+            chat_manager.mark_all_as_read(self.channel, self.domain);
         });
         this.$buttons.on('click', '.o_mail_chat_button_unstar_all', chat_manager.unstar_all);
 
@@ -196,38 +236,80 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
         this.thread.on('toggle_star_status', this, function (message_id) {
             chat_manager.toggle_star_status(message_id);
         });
-        this.composer.on('post_message', this, this.on_post_message);
-        this.composer.on('input_focused', this, this.on_composer_input_focused);
+        this.thread.on('select_message', this, this.select_message);
+        this.thread.on('unselect_message', this, this.unselect_message);
 
-        var def1 = this.thread.prependTo(this.$('.o_mail_chat_content'));
-        var def2 = this.composer.appendTo(this.$('.o_mail_chat_content'));
-        var def3 = this.searchview.appendTo($("<div>"));
+        this.basic_composer.on('post_message', this, this.on_post_message);
+        this.basic_composer.on('input_focused', this, this.on_composer_input_focused);
+        this.extended_composer.on('post_message', this, this.on_post_message);
+        this.extended_composer.on('input_focused', this, this.on_composer_input_focused);
+
+        var def1 = this.thread.appendTo(this.$('.o_mail_chat_content'));
+        var def2 = this.basic_composer.appendTo(this.$('.o_mail_chat_content'));
+        var def3 = this.extended_composer.appendTo(this.$('.o_mail_chat_content'));
+        var def4 = this.searchview.appendTo($("<div>")).then(function () {
+            self.$searchview_buttons = self.searchview.$buttons.contents();
+        });
 
         this.render_sidebar();
 
-        return $.when(def1, def2, def3)
+        return $.when(def1, def2, def3, def4)
             .then(this.set_channel.bind(this, default_channel))
             .then(function () {
+                chat_manager.bus.on('open_channel', self, self.set_channel);
                 chat_manager.bus.on('new_message', self, self.on_new_message);
                 chat_manager.bus.on('update_message', self, self.on_update_message);
                 chat_manager.bus.on('new_channel', self, self.on_new_channel);
                 chat_manager.bus.on('anyone_listening', self, function (channel, query) {
-                    query.is_displayed = query.is_displayed || channel.id === self.channel.id;
+                    query.is_displayed = query.is_displayed || (channel.id === self.channel.id && self.thread.is_at_bottom());
                 });
-                chat_manager.bus.on('unsubscribe_from_channel', self, self.render_sidebar);
+                chat_manager.bus.on('unsubscribe_from_channel', self, self.on_channel_unsubscribed);
                 chat_manager.bus.on('update_needaction', self, self.throttled_render_sidebar);
+                chat_manager.bus.on('update_starred', self, self.throttled_render_sidebar);
                 chat_manager.bus.on('update_channel_unread_counter', self, self.throttled_render_sidebar);
                 chat_manager.bus.on('update_dm_presence', self, self.throttled_render_sidebar);
+                self.thread.$el.on("scroll", null, _.debounce(function () {
+                    if (self.thread.is_at_bottom()) {
+                        chat_manager.mark_channel_as_seen(self.channel);
+                    }
+                }, 100));
             });
+    },
+
+    select_message: function(message_id) {
+        this.$el.addClass('o_mail_selection_mode');
+        var message = chat_manager.get_message(message_id);
+        this.selected_message = message;
+        var subject = "Re: " + message.record_name;
+        this.extended_composer.set_subject(subject);
+        if (this.channel.type !== 'static') {
+            this.basic_composer.toggle(false);
+        }
+        this.extended_composer.toggle(true);
+        this.thread.scroll_to({id: message_id, duration: 200, only_if_necessary: true});
+        this.extended_composer.focus('body');
+    },
+
+    unselect_message: function() {
+        this.basic_composer.toggle(this.channel.type !== 'static' && !this.channel.mass_mailing);
+        this.extended_composer.toggle(this.channel.type !== 'static' && this.channel.mass_mailing);
+        if (!config.device.touch) {
+            var composer = this.channel.mass_mailing ? this.extended_composer : this.basic_composer;
+            composer.focus();
+        }
+        this.$el.removeClass('o_mail_selection_mode');
+        this.thread.unselect();
+        this.selected_message = null;
     },
 
     render_sidebar: function () {
         var self = this;
-        var $sidebar = $(QWeb.render("mail.chat.Sidebar", {
+        var $sidebar = this._render_sidebar({
             active_channel_id: this.channel ? this.channel.id: undefined,
             channels: chat_manager.get_channels(),
             needaction_counter: chat_manager.get_needaction_counter(),
-        }));
+            starred_counter: chat_manager.get_starred_counter(),
+        });
         this.$(".o_mail_chat_sidebar").html($sidebar.contents());
 
         this.$('.o_mail_add_channel[data-type=public]').find("input").autocomplete({
@@ -259,18 +341,23 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
         this.$('.o_mail_add_channel[data-type=dm]').find("input").autocomplete({
             source: function(request, response) {
                 self.last_search_val = _.escape(request.term);
-                self.do_search_partner(self.last_search_val).done(function(result){
-                    response(result);
-                });
+                chat_manager.search_partner(self.last_search_val, 10).done(response);
             },
             select: function(event, ui) {
                 var partner_id = ui.item.id;
-                chat_manager.create_channel(partner_id, "dm");
+                var dm = chat_manager.get_dm_from_partner_id(partner_id);
+                if (dm) {
+                    self.set_channel(dm);
+                } else {
+                    chat_manager.create_channel(partner_id, "dm");
+                }
+                // clear the input
+                $(this).val('');
+                return false;
             },
             focus: function(event) {
                 event.preventDefault();
             },
-            html: true,
         });
 
         this.$('.o_mail_add_channel[data-type=private]').find("input").on('keyup', this, function (event) {
@@ -281,14 +368,20 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
         });
     },
 
-    render_snackbar: function (nb_needactions) {
-        this.$snackbar = $(QWeb.render('mail.chat.UndoSnackbar', {
-            nb_needactions: nb_needactions,
-        }));
+    _render_sidebar: function (options) {
+        return $(QWeb.render("mail.chat.Sidebar", options));
+    },
+
+    render_snackbar: function (template, context, timeout) {
+        if (this.$snackbar) {
+            this.$snackbar.remove();
+        }
+        timeout = timeout || 20000;
+        this.$snackbar = $(QWeb.render(template, context));
         this.$('.o_mail_chat_content').append(this.$snackbar);
-        // Hide snackbar after 20s
+        // Hide snackbar after [timeout] milliseconds (by default, 20s)
         var $snackbar = this.$snackbar;
-        setTimeout(function() { $snackbar.fadeOut(); }, 20000);
+        setTimeout(function() { $snackbar.fadeOut(); }, timeout);
     },
 
     do_search_channel: function(search_val){
@@ -298,21 +391,6 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
             _.each(result, function(channel){
                 var escaped_name = _.escape(channel.name);
                 values.push(_.extend(channel, {
-                    'value': escaped_name,
-                    'label': escaped_name,
-                }));
-            });
-            return values;
-        });
-    },
-
-    do_search_partner: function (search_val) {
-        var Partner = new Model("res.partner");
-        return Partner.call('im_search', [search_val, 20]).then(function(result){
-            var values = [];
-            _.each(result, function(user){
-                var escaped_name = _.escape(user.name);
-                values.push(_.extend(user, {
                     'value': escaped_name,
                     'label': escaped_name,
                 }));
@@ -346,7 +424,9 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
             if (channel.type !== 'static') {
                 // Display snackbar if needactions have been cleared
                 if (channel.needaction_counter > 0) {
-                    self.render_snackbar(channel.needaction_counter);
+                    self.render_snackbar('mail.chat.UndoSnackbar', {
+                        nb_needactions: channel.needaction_counter,
+                    });
                 }
                 chat_manager.mark_channel_as_seen(channel);
                 self.clear_needactions_def = chat_manager.mark_all_as_read(channel);
@@ -354,10 +434,6 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
 
             // Update control panel
             self.set("title", '#' + channel.name);
-            // Hide 'detach' button in static channels
-            self.$buttons
-                .find('.o_mail_chat_button_detach')
-                .toggle(channel.type !== "static");
             // Hide 'invite', 'unsubscribe' and 'settings' buttons in static channels and DM
             self.$buttons
                 .find('.o_mail_chat_button_invite, .o_mail_chat_button_unsubscribe, .o_mail_chat_button_settings')
@@ -368,8 +444,6 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
             self.$buttons
                 .find('.o_mail_chat_button_unstar_all')
                 .toggle(channel.id === "channel_starred");
-
-            self.$('.o_chat_composer').toggle(channel.type !== 'static');
 
             self.$('.o_mail_chat_channel_item')
                 .removeClass('o_active')
@@ -386,12 +460,13 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
 
             // Update control panel before focusing the composer, otherwise focus is on the searchview
             self.update_cp();
-            if (!config.device.touch) {
-                self.composer.focus();
-            }
             if (config.device.size_class === config.device.SIZES.XS) {
                 self.$('.o_mail_chat_sidebar').hide();
             }
+
+            // Display and focus the adequate composer, and unselect possibly selected message
+            // to prevent sending messages as reply to that message
+            self.unselect_message();
 
             self.action_manager.do_push_state({
                 action: self.action.id,
@@ -399,32 +474,16 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
             });
         });
     },
-    unsubscribe_from_channel: function (channel) {
-        var self = this;
-        chat_manager
-            .unsubscribe(channel)
-            .then(this.render_sidebar.bind(this))
-            .then(this.set_channel.bind(this, chat_manager.get_channel("channel_inbox")))
-            .then(function () {
-                if (_.contains(['public', 'private'], channel.type)) {
-                    var msg = _.str.sprintf(_t('You unsubscribed from <b>%s</b>.'), channel.name);
-                    self.do_notify(_t("Unsubscribed"), msg);
-                }
-                delete self.channels_scrolltop[channel.id];
-            });
-    },
 
     get_thread_rendering_options: function (messages) {
         // Compute position of the 'New messages' separator, only once when joining
         // a channel to keep it in the thread when new messages arrive
         if (_.isUndefined(this.messages_separator_position)) {
-            var msg_id = this.last_seen_message_id;
             if (!this.unread_counter) {
                 this.messages_separator_position = false; // no unread message -> don't display separator
-            } else if ((msg_id === false) || !_.findWhere(messages, {id: msg_id})) {
-                this.messages_separator_position = 'top'; // all displayed messages are unread
             } else {
-                this.messages_separator_position = msg_id; // last read message is msg_id
+                var msg = chat_manager.get_last_seen_message(this.channel);
+                this.messages_separator_position = msg ? msg.id : 'top';
             }
         }
         return {
@@ -432,10 +491,12 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
             display_load_more: !chat_manager.all_history_loaded(this.channel, this.domain),
             display_needactions: this.channel.display_needactions,
             messages_separator_position: this.messages_separator_position,
-            squash_close_messages: this.channel.type !== 'static',
+            squash_close_messages: this.channel.type !== 'static' && !this.channel.mass_mailing,
             display_empty_channel: !messages.length && !this.domain.length,
             display_no_match: !messages.length && this.domain.length,
             display_subject: this.channel.mass_mailing || this.channel.id === "channel_inbox",
+            display_email_icon: false,
+            display_reply_icon: true,
         };
     },
 
@@ -483,7 +544,7 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
             cp_content: {
                 $buttons: this.$buttons,
                 $searchview: this.searchview.$el,
-                $searchview_buttons: this.searchview.$buttons.contents(),
+                $searchview_buttons: this.$searchview_buttons,
             },
             searchview: this.searchview,
         });
@@ -508,9 +569,27 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
     },
 
     on_post_message: function (message) {
-        var options = {channel_id: this.channel.id};
+        var self = this;
+        var options = this.selected_message ? {} : {channel_id: this.channel.id};
+        if (this.selected_message) {
+            message.subtype = this.selected_message.is_note ? 'mail.mt_note': 'mail.mt_comment';
+            message.subtype_id = false;
+            message.message_type = 'comment';
+            message.content_subtype = 'html';
+
+            options.model = this.selected_message.model;
+            options.res_id = this.selected_message.res_id;
+        }
         chat_manager
             .post_message(message, options)
+            .then(function() {
+                if (self.selected_message) {
+                    self.render_snackbar('mail.chat.MessageSentSnackbar', {record_name: self.selected_message.record_name}, 5000);
+                    self.unselect_message();
+                } else {
+                    self.thread.scroll_to();
+                }
+            })
             .fail(function () {
                 // todo: display notification
             });
@@ -518,11 +597,15 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
     on_new_message: function (message) {
         var self = this;
         if (_.contains(message.channel_ids, this.channel.id)) {
-            if (this.channel.type !== 'static') {
+            if (this.channel.type !== 'static' && this.thread.is_at_bottom()) {
                 chat_manager.mark_channel_as_seen(this.channel);
             }
+
+            var should_scroll = this.thread.is_at_bottom();
             this.fetch_and_render_thread().then(function () {
-                self.thread.scroll_to({id: message.id});
+                if (should_scroll) {
+                    self.thread.scroll_to({id: message.id});
+                }
             });
         }
         // Re-render sidebar to indicate that there is a new message in the corresponding channels
@@ -551,21 +634,28 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
             this.set_channel(channel);
         }
     },
+    on_channel_unsubscribed: function (channel_id) {
+        if (this.channel.id === channel_id) {
+            this.set_channel(chat_manager.get_channel("channel_inbox"));
+        }
+        this.render_sidebar();
+        delete this.channels_scrolltop[channel_id];
+    },
     on_composer_input_focused: function () {
-        var suggestions = chat_manager.get_mention_partner_suggestions(this.channel);
-        this.composer.mention_set_prefetched_partners(suggestions);
+        var composer = this.channel.mass_mailing ? this.extended_composer : this.basic_composer;
+        var commands = chat_manager.get_commands(this.channel);
+        var partners = chat_manager.get_mention_partner_suggestions(this.channel);
+        composer.mention_set_enabled_commands(commands);
+        composer.mention_set_prefetched_partners(partners);
     },
 
     on_click_button_invite: function () {
-        var title = _.str.sprintf(_t('Invite people to %s'), this.channel.name);
+        var title = _.str.sprintf(_t('Invite people to #%s'), this.channel.name);
         new PartnerInviteDialog(this, title, this.channel.id).open();
-    },
-    on_click_button_detach: function () {
-        chat_manager.detach_channel(this.channel);
     },
 
     on_click_button_unsubscribe: function () {
-        this.unsubscribe_from_channel(this.channel);
+        chat_manager.unsubscribe(this.channel);
     },
     on_click_button_settings: function() {
         this.do_action({
@@ -575,6 +665,10 @@ var ChatAction = Widget.extend(ControlPanelMixin, {
             views: [[false, 'form']],
             target: 'current'
         });
+    },
+    destroy: function() {
+        this.$buttons.off().destroy();
+        this._super.apply(this, arguments);
     },
 });
 

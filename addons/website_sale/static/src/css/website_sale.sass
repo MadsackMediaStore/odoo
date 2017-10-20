@@ -123,10 +123,9 @@
 #products_grid
     > table tr:not(:first-child) > td
         height: 100%
-    &.col-md-12 > table tr:not(:first-child)
-        height: 150px
-    &.col-md-9 > table tr:not(:first-child)
-        height: 140px
+    &.col-md-12, &.col-md-9
+        > table > tbody > tr > td:empty
+            height: 0
 
     &.col-md-12
         .oe-height-1
@@ -151,13 +150,11 @@
         .oe-height-8
             height: 560px
 
+    .oe_product.oe_grid .oe_subdescription
+        max-height: 40px
+
 @media (min-width: 992px)
     #products_grid
-        &.col-md-12 > table tr:not(:first-child)
-            height: 190px
-        &.col-md-9 > table tr:not(:first-child)
-            height: 144px
-
         &.col-md-12
             .oe-height-1
                 height: 95px
@@ -169,6 +166,9 @@
                 height: 570px
             .oe-height-8
                 height: 760px
+
+            .oe_product.oe_grid .oe_subdescription
+                max-height: 70px
         &.col-md-9
             .oe-height-1
                 height: 72px
@@ -183,11 +183,6 @@
 
 @media (min-width: 1200px)
     #products_grid
-        &.col-md-12 > table tr:not(:first-child)
-            height: 250px
-        &.col-md-9 > table tr:not(:first-child)
-            height: 190px
-
         &.col-md-12
             .oe-height-1
                 height: 125px
@@ -211,6 +206,8 @@
             .oe-height-8
                 height: 760px
 
+        .oe_product.oe_grid .oe_subdescription
+            max-height: 120px
 
 @media (max-width: 768px)
     #products_grid
@@ -221,8 +218,13 @@
         .oe_product
             float: left
             width: 100%
-            height: 300px
             display: inline-block
+            &.oe_grid
+                height: 400px
+            &.oe_grid section
+                background: rgba(100, 100, 100, 0.2)
+            .oe_subdescription
+                max-height: 200px
     .products_pager
         .pagination
             margin: 5px auto !important
@@ -230,9 +232,12 @@
 @media (max-width: 400px)
     #products_grid
         .oe_product
-            height: 270px
-            section
-                background: rgba(100, 100, 100, 0.2)
+            &.oe_grid
+                height: 270px
+            &.oe_list
+                height: 200px
+                section
+                    background: rgba(100, 100, 100, 0.2)
             .oe_product_image
                 top: 0
                 bottom: 65px
@@ -251,6 +256,16 @@
 
 .oe_cart table td:first-child
     min-width: 76px
+.oe_cart > .oe_structure
+    clear: both
+
+div#payment_method
+    div.list-group
+        margin-left: 40px
+    .list-group-item
+        padding-top: 5px
+        padding-bottom: 5px
+
 
 @media (max-width: 992px)
     #modal_optional_products table:last-child
@@ -263,8 +278,6 @@
         td:last-child, td:nth-last-child(2)
             width: 15%
 @media (max-width: 500px)
-    .oe_website_sale .oe_website_spinner
-        margin: auto
     .oe_cart table, #modal_optional_products table
         display: inline-block
         thead
@@ -303,6 +316,7 @@
         min-height: 100px
         position: relative
         padding-bottom: 5px
+        padding-left: 180px
         .oe_product_image
             top: 0
             bottom: 0
@@ -312,9 +326,10 @@
         section
             position: relative
             border: 0
-            top: 0
+            top: auto
             bottom: auto
-            left: 180px
+            left: auto
+            right: auto
             background: transparent
 
 .oe_website_sale .row .row .col-md-12
@@ -345,6 +360,11 @@
     .css_not_available_msg
         display: block
 
+.css_quantity
+    max-width: 125px
+    input[name="add_qty"]
+        text-align: center
+
 option.css_not_available
     color: #ccc
 label.css_not_available
@@ -368,6 +388,9 @@ label.css_attribute_color.css_not_available
 .oe_website_sale input.js_quantity
     min-width: 48px
     text-align: center
+
+.oe_website_sale input.quantity
+    padding: 0
 
 /* ---- Publish managment and options ---- */
 
@@ -470,3 +493,57 @@ ul.wizard li:first-child
 
     .cart_line
         border-bottom: 1px #EEE solid
+
+td.noborder
+    border: none !important
+
+.border_primary
+    border: 1px solid #337ab7
+
+.js_change_shipping
+    cursor: pointer
+
+a.no-decoration
+    cursor: pointer
+    text-decoration: none !important
+
+
+#o-carousel-product
+    .carousel-inner div.item
+        height: 400px
+        img
+            max-height: 100%
+    .carousel-control
+        background-image: none !important
+
+    .carousel-indicators
+        background-color: transparent
+        margin: 10px 0 0
+        overflow-y: hidden
+        position: static
+        text-align: left
+        white-space: nowrap
+        width: 100%
+        height: 100px !important
+        text-align: center
+        list-style-position: inside
+
+        li
+            background-color: transparent !important
+            border-radius: 0
+            display: inline-block
+            margin: 0 !important
+            width: 54px !important
+            height: 54px !important
+            border: 0 !important
+            box-shadow: none !important
+
+            img
+                display: block
+                opacity: 0.5
+
+            &.active img
+                opacity: 1
+
+.ecom-zoomable img[data-zoom]
+    cursor: zoom-in

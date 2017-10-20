@@ -3,15 +3,17 @@
 # * website_links
 # 
 # Translators:
-# Otgonbayar Agvaan <gobi.mn@gmail.com>, 2015
+# Otgonbayar.A <gobi.mn@gmail.com>, 2017
+# Martin Trigaux <mat@odoo.com>, 2017
+# Khishigbat Ganbold <khishigbat@asterisk-tech.mn>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo 9.0\n"
+"Project-Id-Version: Odoo Server 10.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-07 14:41+0000\n"
-"PO-Revision-Date: 2015-11-18 13:55+0000\n"
-"Last-Translator: Otgonbayar Agvaan <gobi.mn@gmail.com>\n"
-"Language-Team: Mongolian (http://www.transifex.com/odoo/odoo-9/language/mn/)\n"
+"POT-Creation-Date: 2016-09-19 12:36+0000\n"
+"PO-Revision-Date: 2016-09-19 12:36+0000\n"
+"Last-Translator: Khishigbat Ganbold <khishigbat@asterisk-tech.mn>, 2017\n"
+"Language-Team: Mongolian (https://www.transifex.com/odoo/teams/41243/mn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,9 +21,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: website_links
+#. openerp-web
+#: code:addons/website_links/static/src/js/website_links_charts.js:53
+#, python-format
+msgid " clicks"
+msgstr "даралтууд"
+
+#. module: website_links
+#. openerp-web
+#: code:addons/website_links/static/src/js/website_links_charts.js:104
+#, python-format
+msgid " countries"
+msgstr "улсууд"
+
+#. module: website_links
+#. openerp-web
+#: code:addons/website_links/static/src/js/website_links_charts.js:57
+#, python-format
+msgid "# of clicks"
+msgstr "дарсан тоо"
+
+#. module: website_links
 #: model:ir.ui.view,arch_db:website_links.share_page_menu
-msgid "<span title=\"Track this page to count clicks\">Share this Page</span>"
-msgstr "<span title=\"Даралтуудыг тоолохын тулд энэ хуудсыг хөтлөх\">Энэ хуудсыг хуваалцах</span>"
+msgid "<span title=\"Track this page to count clicks\">Track this Page</span>"
+msgstr ""
+"<span title=\"Даралтыг тоолохын тулд энэ хуудсыг хөтлөнө\">Энэ хуудсыг "
+"хөтлөх</span>"
 
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.graphs
@@ -64,7 +89,11 @@ msgid ""
 "Campaign <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-"
 "placement=\"top\" title=\"Defines the context of your link. It might be an "
 "event you want to promote or a special promotion.\"/>"
-msgstr "Аян <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Таны холбоосын агуулгыг тодорхойлно. Энэ нь таны идэвхжүүлэхийг хүссэн арга хэмжээ байж болно. Эсвэл тусгай урамшуулал байж болно\"/>"
+msgstr ""
+"Аян <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-"
+"placement=\"top\" title=\"Таны холбоосын агуулгыг тодорхойлно. Энэ нь таны "
+"идэвхжүүлэхийг хүссэн арга хэмжээ байж болно. Эсвэл тусгай урамшуулал байж "
+"болно\"/>"
 
 #. module: website_links
 #. openerp-web
@@ -107,7 +136,10 @@ msgid ""
 "Medium <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-"
 "placement=\"top\" title=\"Defines the medium used to share your link. It "
 "might be an email, or a Facebook Ads for instance.\"/>"
-msgstr "Дундаж <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Таны холбоосыг хуваалахад хэрэглэгдэх дундажийг тодорхойлно. Энэ нь имэйл, эсвэл Facebook реклам байж болох юм.\"/>"
+msgstr ""
+"Дундаж <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-"
+"placement=\"top\" title=\"Таны холбоосыг хуваалахад хэрэглэгдэх дундажийг "
+"тодорхойлно. Энэ нь имэйл, эсвэл Facebook реклам байж болох юм.\"/>"
 
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -129,7 +161,9 @@ msgstr "Сүүлд хэрэглэгдсэн"
 msgid ""
 "Share this page with a <strong>short link</strong> that includes "
 "<strong>analytics trackers</strong>."
-msgstr "Энэ хуудсыг <strong>богино холбоосоор</strong> хуваалцана <strong>шинжилгээний хөтлөгчийг</strong> агуулна."
+msgstr ""
+"Энэ хуудсыг <strong>богино холбоосоор</strong> хуваалцана "
+"<strong>шинжилгээний хөтлөгчийг</strong> агуулна."
 
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -137,7 +171,10 @@ msgid ""
 "Source <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-"
 "placement=\"top\" title=\"Defines the source from which your traffic will "
 "come from, Facebook or Twitter for instance.\"/>"
-msgstr "Эх <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Тань руу ирсэн хандалт хаанаас ирснийг тодорхойлно, жишээлбэл Facebook эсвэл Twitter байж болно.\"/>"
+msgstr ""
+"Эх <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-"
+"placement=\"top\" title=\"Тань руу ирсэн хандалт хаанаас ирснийг "
+"тодорхойлно, жишээлбэл Facebook эсвэл Twitter байж болно.\"/>"
 
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.graphs
@@ -152,11 +189,22 @@ msgid "Stats"
 msgstr "Статистик"
 
 #. module: website_links
+#. openerp-web
+#: code:addons/website_links/static/src/js/website_links_charts.js:210
+#: code:addons/website_links/static/src/js/website_links_charts.js:211
+#: code:addons/website_links/static/src/js/website_links_charts.js:212
+#, python-format
+msgid "There is no data to show"
+msgstr "Харуулах өгөгдөл алга"
+
+#. module: website_links
 #: model:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid ""
-"Thoses trackers can be used in Google Analytics to track clicks and "
-"visitors, or in Odoo reports to track opportunities and related revenues."
-msgstr "Энэ хөтлөгчид нь Google Analytics-д зочлогчдийн даралтыг хөтлөхөд ашиглаж болно, эсвэл Odoo-д боломж болон холбогдох орлогыг хөтлөх тухай мэдэгдэнэ."
+"Those trackers can be used in Google Analytics to track clicks and visitors,"
+" or in Odoo reports to track opportunities and related revenues."
+msgstr ""
+"Энэ хөтлөгчид нь Google Analytics-г ашиглан дарал болон зочлогчдыг хөтлөдөг."
+" Эсвэл Odoo дотор боломж болон холбогдох орлогыг хөтлөж тайлагнадаг."
 
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -169,6 +217,13 @@ msgstr "URL"
 #, python-format
 msgid "Unable to get recent links"
 msgstr "Сүүлийн холбоосыг авах боломжгүй байна"
+
+#. module: website_links
+#. openerp-web
+#: code:addons/website_links/static/src/js/website_links_charts.js:99
+#, python-format
+msgid "Undefined"
+msgstr "Тодорхойлогдоогүй"
 
 #. module: website_links
 #. openerp-web

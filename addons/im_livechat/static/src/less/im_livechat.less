@@ -16,6 +16,7 @@
     border-bottom: 0px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    z-index: 5;
 }
 
 .o_chat_window {
@@ -24,8 +25,10 @@
         display: none;
     }
 
-    .o_chat_content .o_livechat_rating {
+    .o_livechat_rating {
         /* Livechat Rating : feedback smiley */
+        .o-flex(1, 1, auto);
+        overflow: auto;
         padding: 15px;
 
         .o_livechat_no_feedback {
